@@ -23,6 +23,8 @@ public class SCR_Item : MonoBehaviour
 
     public State m_State;
 
+    public int point { private set; get; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,11 @@ public class SCR_Item : MonoBehaviour
     {
         
     }
+
+    public void SetUp(int amount)
+    {
+        point = amount;
+    }    
 
     public void OnClick()
     {
@@ -49,7 +56,6 @@ public class SCR_Item : MonoBehaviour
         UpdateUI();
         
         m_ImgReward.gameObject.SetActive(true);
-        int point = Random.Range(1, 100);
         m_Point.text = point + "K";
         gameObject.GetComponent<Button>().interactable = false;
         return point;

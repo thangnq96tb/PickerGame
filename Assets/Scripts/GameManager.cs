@@ -10,29 +10,37 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     [SerializeField]
     TextMeshProUGUI m_TotalPoint;
     [SerializeField]
+    TextMeshProUGUI m_MaxPointCanEarn;
+    [SerializeField]
     public static Sprite[] sprites;
     [SerializeField]
     SCR_Item m_ItemPfb;
-    [SerializeField]
-    int m_BoardCol, m_BoardRow;
     [SerializeField]
     GridLayoutGroup m_Board;
     [SerializeField]
     TextMeshProUGUI m_PickTxt;
 
+    private int m_BoardCol, m_BoardRow;
     private float m_BoardWidth, m_BoardHeight;
-    private int m_point = 0;
-    private int m_numberPick = 5;
+    private int totalPoint = 0;
+    private int m_numberPick;
     private List<SCR_Item> m_listItem;
+    
+    private SCR_GameConfig m_GameConfig;
 
     private void Start()
     {
+        m_GameConfig = Resources.Load<SCR_GameConfig>("GameConfig");
+        m_BoardCol = m_GameConfig.m_BoardConfig.numberCol;
+        m_BoardRow = m_GameConfig.m_BoardConfig.numberRow;
+        m_numberPick = m_GameConfig.m_NumberPick;
+
         m_listItem = new List<SCR_Item>();
 
         m_BoardWidth = m_Board.GetComponent<RectTransform>().rect.width;
         m_BoardHeight = m_Board.GetComponent<RectTransform>().rect.height;
 
-        m_TotalPoint.text = m_point.ToString();
+        m_TotalPoint.text = totalPoint.ToString();
         m_Board.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         m_Board.constraintCount = m_BoardCol;
 
@@ -64,6 +72,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         for (int i = 0; i < m_BoardCol * m_BoardRow; i++)
         {
             SCR_Item item = Instantiate(m_ItemPfb, m_Board.transform);
+            int randomPoint = Random.Range(m_GameConfig.m_PointConfig.min, m_GameConfig.m_PointConfig.max);
+            item.SetUp(randomPoint);
             m_listItem.Add(item);
         }
         m_numberPick++;
@@ -71,8 +81,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void AddPoint(int amount)
     {
-        m_point += amount;
-        m_TotalPoint.text = m_point.ToString();
+        totalPoint += amount;
+        m_TotalPoint.text = totalPoint.ToString();
     }    
 
     public void UpdatePick()
@@ -81,10 +91,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         if(m_numberPick > 1)
         {
             m_PickTxt.text = $"{m_numberPick} picks!";
+            m_MaxPointCanEarn.text = MaxPointCanEarn().ToString();
         }
         else if(m_numberPick == 1)
         {
             m_PickTxt.text = "1 pick!";
+            m_MaxPointCanEarn.text = MaxPointCanEarn().ToString();
         }
         else
         {
@@ -95,5 +107,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
                 item.ShowItem();
             }    
         } 
+    }
+    
+    public int MaxPointCanEarn()
+    {
+       return totalPoint + m_listItem.Where(x => x.m_State == State.MYSTERY).OrderByDescending(x => x.point).Take(m_numberPick).Sum(x => x.point);
     }    
 }
