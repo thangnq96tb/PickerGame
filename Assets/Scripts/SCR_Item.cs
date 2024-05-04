@@ -24,8 +24,20 @@ public class SCR_Item : MonoBehaviour
 
     public void OnClick()
     {
+        GameManager.Instance.AddPoint(ShowItem());
+    }    
+
+    public int ShowItem()
+    {
         m_ImgReward.gameObject.SetActive(true);
-        m_Point.text = Random.Range(1, 100) + "K";
+        int point = Random.Range(1, 100);
+        m_Point.text = point + "K";
         gameObject.GetComponent<Button>().interactable = false;
+        return point;
+    }    
+
+    public Vector2 GetSize()
+    {
+        return gameObject.GetComponent<RectTransform>().rect.size;
     }    
 }
