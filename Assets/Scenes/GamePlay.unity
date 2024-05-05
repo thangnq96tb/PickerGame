@@ -1135,9 +1135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d769411802710c49b997be1b63bcf30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ItemPfb: {fileID: 417946742751138878, guid: 55803164ff204d24a9b9dfb272a97659, type: 3}
   m_TotalPoint: {fileID: 277819784}
   m_MaxPointCanEarn: {fileID: 1338484271}
-  m_ItemPfb: {fileID: 417946742751138878, guid: 55803164ff204d24a9b9dfb272a97659, type: 3}
   m_Board: {fileID: 905935696}
   m_PickTxt: {fileID: 186256203}
 --- !u!1 &775757918

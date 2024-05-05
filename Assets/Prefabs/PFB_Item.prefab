@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 456420505370969071}
   - component: {fileID: 456420505370969069}
   - component: {fileID: 456420505370969068}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TXT_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 456420505880302505}
   - component: {fileID: 273273416197426476}
   - component: {fileID: 417946742751138878}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PFB_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 8285959357765027538}
   - component: {fileID: 389637705256685188}
   - component: {fileID: 3147788059080916286}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UnSelected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 8387736552765877752}
   - component: {fileID: 4714242202726948380}
   - component: {fileID: 3122370748361609112}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.93410516, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 7314966793205828234}
   - component: {fileID: 5310836876465293961}
   - component: {fileID: 3740159846969159932}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IMG_Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

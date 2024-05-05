@@ -14,8 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BoardConfig:
     numberCol: 4
-    numberRow: 3
+    numberRow: 6
+    min: 2
+    max: 10
   m_PointConfig:
-    min: 10
-    max: 100
-  m_NumberPick: 5
+    min: 1
+    max: 1000
+  m_ListChance:
+  - m_Image: {fileID: 21300000, guid: f65b16760b032074c9189b9b434d8176, type: 3}
+    value: 2
+  - m_Image: {fileID: 21300000, guid: 0b2a306293e04e843bfee509c4000a17, type: 3}
+    value: 3
+  - m_Image: {fileID: 21300000, guid: 5860a92c9868644438d842c0abc56014, type: 3}
+    value: 4
+  - m_Image: {fileID: 21300000, guid: 9bac3c62c41ddfa408746a7f51cbab54, type: 3}
+    value: 5
+  - m_Image: {fileID: 21300000, guid: b4f02d7e29dfb8f4e9ee5b93097d2885, type: 3}
+    value: 6
+  - m_Image: {fileID: 21300000, guid: 35362ad15e27a2b408704c0936f633b8, type: 3}
+    value: 7
+  - m_Image: {fileID: 21300000, guid: 499ca0b17c26e7a4ebba301e08096527, type: 3}
+    value: 8
+  - m_Image: {fileID: 21300000, guid: 8298da2de49254440b5e462751f8abee, type: 3}
+    value: 9
+  m_NumberPick: 4

@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
+    [SerializeField]
+    SCR_Item m_ItemPfb;
+
+    [Header("TOP BAR")]
     [SerializeField]
     TextMeshProUGUI m_TotalPoint;
     [SerializeField]
     TextMeshProUGUI m_MaxPointCanEarn;
     [SerializeField]
     public static Sprite[] sprites;
-    [SerializeField]
-    SCR_Item m_ItemPfb;
     [SerializeField]
     GridLayoutGroup m_Board;
     [SerializeField]
@@ -25,7 +28,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     private int totalPoint = 0;
     private int m_numberPick;
     private List<SCR_Item> m_listItem;
-    
+
     private SCR_GameConfig m_GameConfig;
 
     private void Start()
@@ -67,12 +70,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         foreach (Transform item in m_Board.transform)
         {
             Destroy(item.gameObject);
+
         }
 
-        for (int i = 0; i < m_BoardCol * m_BoardRow; i++)
+        int totalItem = m_BoardCol * m_BoardRow;
+
+        for (int i = 0; i < totalItem; i++)
         {
             SCR_Item item = Instantiate(m_ItemPfb, m_Board.transform);
-            int randomPoint = Random.Range(m_GameConfig.m_PointConfig.min, m_GameConfig.m_PointConfig.max);
+            int randomPoint = Random.Range(m_GameConfig.m_PointConfig.min, m_GameConfig.m_PointConfig.max / totalItem);
             item.SetUp(randomPoint);
             m_listItem.Add(item);
         }
@@ -83,6 +89,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         totalPoint += amount;
         m_TotalPoint.text = totalPoint.ToString();
+        PlayerPrefs.SetInt("TotalPoint", totalPoint);
     }    
 
     public void UpdatePick()
@@ -105,6 +112,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             foreach(var item in m_listItem)
             {
                 item.ShowItem();
+                SceneManager.LoadScene("LuckyChance");
             }    
         } 
     }
@@ -112,5 +120,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public int MaxPointCanEarn()
     {
        return totalPoint + m_listItem.Where(x => x.m_State == State.MYSTERY).OrderByDescending(x => x.point).Take(m_numberPick).Sum(x => x.point);
+    }    
+
+    public SCR_GameConfig GetGameConfig()
+    {
+        return m_GameConfig;
     }    
 }
