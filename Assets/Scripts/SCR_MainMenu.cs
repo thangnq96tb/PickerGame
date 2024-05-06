@@ -9,6 +9,7 @@ public class SCR_MainMenu : MonoBehaviour
 {
     [SerializeField] private Button m_GoBtn;
     [SerializeField] private Button m_ClearDataBtn;
+    [SerializeField] private Button m_QuitBTN;
     [SerializeField] private Button m_IncreaseColBtn;
     [SerializeField] private Button m_DecreaseColBtn;
     [SerializeField] private Button m_IncreaseRowBtn;
@@ -29,6 +30,8 @@ public class SCR_MainMenu : MonoBehaviour
     {
         m_GameConfig = Resources.Load<SCR_GameConfig>("GameConfig");
         m_GoBtn.onClick.AddListener(delegate { OnGoButtonClicked(); } );
+        m_QuitBTN.onClick.AddListener(delegate { Application.Quit(); } );
+
         m_ClearDataBtn.onClick.AddListener(delegate { PlayerPrefs.DeleteAll(); UpdateStatistic(); });
         m_IncreaseColBtn.onClick.AddListener(delegate { ChangeNumberCol(1); });
         m_IncreaseRowBtn.onClick.AddListener(delegate { ChangeNumberRow(1); });
