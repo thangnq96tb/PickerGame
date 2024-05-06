@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class SCR_MainMenu : MonoBehaviour
 {
     [SerializeField] private Button m_GoBtn;
+    [SerializeField] private Button m_ClearDataBtn;
     [SerializeField] private Button m_IncreaseColBtn;
     [SerializeField] private Button m_DecreaseColBtn;
     [SerializeField] private Button m_IncreaseRowBtn;
@@ -15,6 +16,10 @@ public class SCR_MainMenu : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI m_NumberColTxt;
     [SerializeField] private TextMeshProUGUI m_NumberRowTxt;
+
+    [SerializeField] TextMeshProUGUI m_highestPointTXT;
+    [SerializeField] TextMeshProUGUI m_lowestPointTXT;
+    [SerializeField] TextMeshProUGUI m_bestTimeTXT;
 
     private SCR_GameConfig m_GameConfig;
     private int numberCol, numberRow;
@@ -24,7 +29,7 @@ public class SCR_MainMenu : MonoBehaviour
     {
         m_GameConfig = Resources.Load<SCR_GameConfig>("GameConfig");
         m_GoBtn.onClick.AddListener(delegate { OnGoButtonClicked(); } );
-
+        m_ClearDataBtn.onClick.AddListener(delegate { PlayerPrefs.DeleteAll(); UpdateStatistic(); });
         m_IncreaseColBtn.onClick.AddListener(delegate { ChangeNumberCol(1); });
         m_IncreaseRowBtn.onClick.AddListener(delegate { ChangeNumberRow(1); });
         m_DecreaseColBtn.onClick.AddListener(delegate { ChangeNumberCol(-1); });
@@ -34,12 +39,13 @@ public class SCR_MainMenu : MonoBehaviour
         numberRow = m_GameConfig.m_BoardConfig.numberRow;
 
         UpdateUI();
+        UpdateStatistic();
     }
 
     public void OnGoButtonClicked()
     {
-        m_GameConfig.m_BoardConfig.numberCol = numberCol;
-        m_GameConfig.m_BoardConfig.numberRow = numberRow;
+        PlayerPrefs.SetInt("NumberCol", numberCol);
+        PlayerPrefs.SetInt("NumberRow", numberRow);
 
         SceneManager.LoadScene("GamePlay");
     }
@@ -65,4 +71,14 @@ public class SCR_MainMenu : MonoBehaviour
         m_NumberColTxt.text = numberCol.ToString();
         m_NumberRowTxt.text = numberRow.ToString();
     }
+
+    public void UpdateStatistic()
+    {
+        int highestPoint = PlayerPrefs.GetInt("HighestPoint");
+        int lowestPoint = PlayerPrefs.GetInt("LowestPoint");
+        int bestTime = PlayerPrefs.GetInt("BestTime");
+        m_highestPointTXT.text = highestPoint == 0 ? "NA" : PlayerPrefs.GetInt("HighestPoint").ToString();
+        m_lowestPointTXT.text = lowestPoint == 0 ? "NA" : PlayerPrefs.GetInt("LowestPoint").ToString();
+        m_bestTimeTXT.text = bestTime == 0 ? "NA" : PlayerPrefs.GetInt("BestTime").ToString();
+    }    
 }

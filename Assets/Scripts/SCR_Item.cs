@@ -12,14 +12,10 @@ public enum State
 }
 public class SCR_Item : MonoBehaviour
 {
-    [SerializeField]
-    public Image m_ImgReward;
-    [SerializeField]
-    public TextMeshProUGUI m_Point;
-    [SerializeField]
-    public GameObject m_Selected;
-    [SerializeField]
-    public GameObject m_UnSelected;
+    [SerializeField] public Image m_ImgReward;
+    [SerializeField] public TextMeshProUGUI m_Point;
+    [SerializeField] public GameObject m_Selected;
+    [SerializeField] public GameObject m_UnSelected;
 
     public State m_State;
 
@@ -56,7 +52,7 @@ public class SCR_Item : MonoBehaviour
         UpdateUI();
         
         m_ImgReward.gameObject.SetActive(true);
-        m_Point.text = point + "K";
+        m_Point.text = point.ToString();
         gameObject.GetComponent<Button>().interactable = false;
         return point;
     }    

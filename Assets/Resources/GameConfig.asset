@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   m_BoardConfig:
-    numberCol: 4
-    numberRow: 6
+    numberCol: 5
+    numberRow: 3
     min: 2
     max: 10
   m_PointConfig:

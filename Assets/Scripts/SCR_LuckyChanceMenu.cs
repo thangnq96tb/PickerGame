@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SCR_LuckyChanceMenu : MonoBehaviour
 {
-    [SerializeField]
-    TextMeshProUGUI m_TotalPoint;
-    [SerializeField]
-    Button[] m_MysteryBoxes;
-    [SerializeField]
-    GameObject[] m_OpenedBoxes;
-    [SerializeField]
-    GameObject m_MysteryBox;
-    [SerializeField]
-    GameObject m_OpenedBox;
-    [SerializeField]
-    TextMeshProUGUI m_PickTxt;
+    [SerializeField] TextMeshProUGUI m_TotalPoint;
+    [SerializeField] Button[] m_MysteryBoxes;
+    [SerializeField] GameObject[] m_OpenedBoxes;
+    [SerializeField] GameObject m_MysteryBox;
+    [SerializeField] GameObject m_OpenedBox;
+    [SerializeField] TextMeshProUGUI m_PickTxt;
+    [SerializeField] GameObject m_Statistic;
+    [SerializeField] TextMeshProUGUI m_highestPointTXT;
+    [SerializeField] TextMeshProUGUI m_lowestPointTXT;
+    [SerializeField] TextMeshProUGUI m_bestTimeTXT;
 
+    [SerializeField]
+    Button m_HomeBTN;
+    
     private Dictionary<Button, Chance> m_listChances;
     private SCR_GameConfig m_GameConfig;
-
+    private int totalPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,7 @@ public class SCR_LuckyChanceMenu : MonoBehaviour
             m_MysteryBoxes[i].onClick.AddListener(delegate { OpenBox(currentIndex); });
             m_listChances.Add(m_MysteryBoxes[i], shuffledChances[i]);
         }
+        m_Statistic.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,8 +63,39 @@ public class SCR_LuckyChanceMenu : MonoBehaviour
             m_OpenedBoxes[i].GetComponentsInChildren<Image>()[1].sprite = m_listChances.ElementAt(i).Value.m_Image;
             if(i == index)
             {
-                m_TotalPoint.text = (PlayerPrefs.GetInt("TotalPoint") * m_listChances.ElementAt(i).Value.value).ToString();
+                totalPoint = (PlayerPrefs.GetInt("TotalPoint") * m_listChances.ElementAt(i).Value.value);
+                if(totalPoint > PlayerPrefs.GetInt("HighestPoint"))
+                {
+                    PlayerPrefs.SetInt("HighestPoint", totalPoint);
+                }    
+
+                if(PlayerPrefs.GetInt("LowestPoint") == 0)
+                {
+                    PlayerPrefs.SetInt("LowestPoint", totalPoint);
+                }    
+                else if(totalPoint < PlayerPrefs.GetInt("LowestPoint"))
+                {
+                    PlayerPrefs.SetInt("LowestPoint", totalPoint);
+                }
+
+                m_TotalPoint.text = totalPoint.ToString();
             }    
-        }    
+        }
+
+        StartCoroutine(ShowStatistic());
+    }    
+
+    IEnumerator ShowStatistic()
+    {
+        yield return new WaitForSeconds(2);
+        m_Statistic.gameObject.SetActive(true);
+        int highestPoint = PlayerPrefs.GetInt("HighestPoint");
+        int lowestPoint = PlayerPrefs.GetInt("LowestPoint");
+        int bestTime = PlayerPrefs.GetInt("BestTime");
+        m_highestPointTXT.text = highestPoint == 0 ? "NA" : PlayerPrefs.GetInt("HighestPoint").ToString();
+        m_lowestPointTXT.text = lowestPoint == 0 ? "NA" : PlayerPrefs.GetInt("LowestPoint").ToString();
+        m_bestTimeTXT.text = bestTime == 0 ? "NA" : PlayerPrefs.GetInt("BestTime").ToString();
+
+        m_HomeBTN.onClick.AddListener(delegate { SceneManager.LoadScene("MainMenu"); });
     }    
 }
