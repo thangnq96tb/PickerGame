@@ -52,6 +52,7 @@ public class SCR_LuckyChanceMenu : MonoBehaviour
 
     public void OpenBox(int index)
     {
+        SoundManager.Instance.PlaySoundEffect(SoundManager.SFX.CLICK);
         m_PickTxt.gameObject.SetActive(false);
         m_MysteryBox.gameObject.SetActive(false);
         m_OpenedBox.gameObject.SetActive(true);
@@ -88,6 +89,7 @@ public class SCR_LuckyChanceMenu : MonoBehaviour
     IEnumerator ShowStatistic()
     {
         yield return new WaitForSeconds(2);
+        SoundManager.Instance.PlaySoundEffect(SoundManager.SFX.OUTRO);
         m_Statistic.gameObject.SetActive(true);
         int highestPoint = PlayerPrefs.GetInt("HighestPoint");
         int lowestPoint = PlayerPrefs.GetInt("LowestPoint");

@@ -16,6 +16,7 @@ public class SCR_Item : MonoBehaviour
     [SerializeField] public TextMeshProUGUI m_Point;
     [SerializeField] public GameObject m_Selected;
     [SerializeField] public GameObject m_UnSelected;
+    [SerializeField] public GameObject m_VFXItemSelect;
 
     public State m_State;
 
@@ -40,11 +41,20 @@ public class SCR_Item : MonoBehaviour
 
     public void OnClick()
     {
-        GameManager.Instance.AddPoint(ShowItem());
-        GameManager.Instance.UpdatePick();
-        m_State = State.SELECTED;
-        UpdateUI();
+        StartCoroutine(ChooseItem());
     }    
+    
+    IEnumerator ChooseItem()
+    {
+        Instantiate(m_VFXItemSelect, transform);
+        SoundManager.Instance.PlaySoundEffect(SoundManager.SFX.CLICK);
+        yield return new WaitForSeconds(0.6f);
+
+        GameManager.Instance.AddPoint(ShowItem());
+        m_State = State.SELECTED;
+        GameManager.Instance.UpdatePick();
+        UpdateUI();
+    }
 
     public int ShowItem()
     {

@@ -147,7 +147,6 @@ GameObject:
   - component: {fileID: 456420505880302503}
   - component: {fileID: 456420505880302502}
   - component: {fileID: 456420505880302505}
-  - component: {fileID: 273273416197426476}
   - component: {fileID: 417946742751138878}
   m_Layer: 5
   m_Name: PFB_Item
@@ -273,26 +272,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!95 &273273416197426476
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456420505880302507}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 840992b09257e5e4d8a02596a9b1d0d3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &417946742751138878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +288,7 @@ MonoBehaviour:
   m_Point: {fileID: 456420505370969068}
   m_Selected: {fileID: 2972697702498450953}
   m_UnSelected: {fileID: 2270519253193129706}
+  m_VFXItemSelect: {fileID: 4472089644014005612, guid: 26a37df2a89b0584d923207dbd17ad30, type: 3}
   m_State: 0
 --- !u!1 &2270519253193129706
 GameObject:

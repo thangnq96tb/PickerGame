@@ -37,4 +37,13 @@ MonoBehaviour:
     value: 8
   - m_Image: {fileID: 21300000, guid: 8298da2de49254440b5e462751f8abee, type: 3}
     value: 9
+  m_SoundInfo:
+  - m_id: 0
+    m_Audio: {fileID: 8300000, guid: 2cc45c0490475438b8f9404a9d82c6ad, type: 3}
+  - m_id: 1
+    m_Audio: {fileID: 8300000, guid: 6b3a21a1ee74643fea1cf5019a23dfaa, type: 3}
+  - m_id: 2
+    m_Audio: {fileID: 8300000, guid: 96b8c85c551624ce2a0aa261e342f7b6, type: 3}
+  - m_id: 3
+    m_Audio: {fileID: 8300000, guid: cc42cee2cfe9a44bd9081f9585899106, type: 3}
   m_NumberPick: 4
