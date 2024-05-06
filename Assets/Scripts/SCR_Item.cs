@@ -49,11 +49,10 @@ public class SCR_Item : MonoBehaviour
         m_VFXItemSelect.GetComponent<RectTransform>().sizeDelta = new Vector2(gameObject.GetComponent<RectTransform>().rect.width, gameObject.GetComponent<RectTransform>().rect.height);
         Instantiate(m_VFXItemSelect, transform);
         SoundManager.Instance.PlaySoundEffect(SoundManager.SFX.CLICK);
-        yield return new WaitForSeconds(0.6f);
-
         GameManager.Instance.AddPoint(ShowItem());
         m_State = State.SELECTED;
         GameManager.Instance.UpdatePick();
+        yield return new WaitForSeconds(0.6f);
         UpdateUI();
     }
 
